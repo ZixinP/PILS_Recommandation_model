@@ -12,7 +12,7 @@ class FocusedHumanBodyModel(nn.Module):
         self.regressor = SMPLRegressor() 
         
         # Bypass Network (CNN + ResNet)
-        self.bypass_net = BypassNetwork() [cite: 109]
+        self.bypass_net = BypassNetwork() 
 
     def forward(self, image):
         # forward propagation
