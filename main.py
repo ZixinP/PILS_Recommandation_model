@@ -17,7 +17,7 @@ smplx_layer = SMPLWrapper(model_path="./smplx_models")
 measurement_module = AnthropometricModule(standard="ISO_8559") 
 
 
-input_image = Image.open("your_front_photo.jpg")
+input_image = Image.open("way_of_scan_photo.jpg")
 
 preprocess = transforms.Compose([
     transforms.Resize((512, 384)),
