@@ -1,0 +1,69 @@
+# ==========================================
+# FashionistAI - Git Ignore File
+# ==========================================
+
+# Dependencies
+node_modules/
+**/node_modules/
+yarn.lock
+pnpm-lock.yaml
+
+# Build output
+dist/
+build/
+**/build/
+**/dist/
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+*.tmp
+*.temp
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/tmp/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Uploads
+uploads/
+
+# Python Microservice
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+microservices/python/venv/
+microservices/python/__pycache__/
+
+# Frontend
+frontend/node_modules/
+frontend/build/
+frontend/package-lock.json
+
+# Testing
+coverage/
+.nyc_output/
+
+# Misc
+*.bak
+RESTRUCTURE_PLAN.txt
+
+# Keep model files in git (or comment if too large)
+# microservices/python/*.pt
