@@ -1,0 +1,31 @@
+{
+  "brand": "H&M",
+  "unit": "cm",
+  "categories": {
+    "male": {
+      "tops": [
+        { "label": "S", "chest": [88, 92], "waist": [76, 80] },
+        { "label": "M", "chest": [96, 100], "waist": [84, 88] },
+        { "label": "L", "chest": [104, 108], "waist": [92, 96] }
+      ],
+      "pantalons": [
+        { "label": "44", "waist": [74, 78], "hips": [90, 94] },
+        { "label": "46", "waist": [78, 82], "hips": [94, 98] },
+        { "label": "48", "waist": [82, 86], "hips": [98, 102] }
+      ]
+    },
+    "female": {
+      "tops": [
+        { "label": "XS", "chest": [80, 84], "waist": [60, 64] },
+        { "label": "S", "chest": [84, 88], "waist": [64, 68] },
+        { "label": "M", "chest": [88, 94], "waist": [68, 74] },
+        { "label": "L", "chest": [94, 100], "waist": [74, 80] }
+      ],
+      "jupes": [
+        { "label": "XS", "waist": [62, 66], "hips": [86, 90] },
+        { "label": "S", "waist": [66, 70], "hips": [90, 94] },
+        { "label": "M", "waist": [70, 76], "hips": [94, 100] }
+      ]
+    }
+  }
+}

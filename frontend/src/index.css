@@ -1,0 +1,104 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.App-header {
+  text-align: center;
+  color: white;
+  padding: 2rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.App-header h1 {
+  font-size: 2.5rem;
+  margin: 0 0 0.5rem 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.App-header p {
+  font-size: 1.1rem;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.device-indicator {
+  font-size: 0.9rem;
+  margin-top: 0.5rem !important;
+  opacity: 0.7;
+  font-style: italic;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 2rem 2rem 2rem;
+  max-width: 1400px; /* Augmenté pour permettre 2 colonnes */
+  margin: 0 auto;
+  width: 100%;
+}
+
+.pc-layout {
+  display: flex;
+  gap: 30px;
+  max-width: 1400px;
+  width: 100%;
+  justify-content: center;
+  align-items: flex-start; /* Alignement en haut */
+  flex-wrap: nowrap; /* Pas de retour à la ligne sur grand écran */
+}
+
+.qr-section {
+  flex: 0 0 450px; /* Largeur fixe pour le QR */
+  min-width: 400px;
+}
+
+.capture-section {
+  flex: 1;
+  min-width: 450px;
+  max-width: 600px;
+}
+
+@media (max-width: 1024px) {
+  .main-container {
+    padding: 0 1rem 1rem 1rem;
+  }
+  
+  .App-header h1 {
+    font-size: 2rem;
+  }
+
+  .pc-layout {
+    flex-wrap: wrap; /* Retour à la ligne sur écrans moyens */
+  }
+
+  .qr-section,
+  .capture-section {
+    flex: 1 1 100%;
+    max-width: 100%;
+    min-width: 300px;
+  }
+}

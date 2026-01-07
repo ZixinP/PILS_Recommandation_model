@@ -1,0 +1,307 @@
+/* Styles pour mobile en priorité (plein écran) */
+.capture-container {
+    position: relative;
+    width: 100%;
+    align-self: stretch;
+    margin: 0;
+    overflow: hidden;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    min-height: 600px;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+/* Styles pour les écrans plus larges (PC) */
+@media (min-width: 768px) {
+    .capture-container {
+        height: 80vh;
+        max-height: 750px;
+    }
+}
+
+@media (max-width: 767px) {
+    .capture-container {
+        border-radius: 0;
+        min-height: 100vh;
+        max-width: 100%;
+    }
+}
+
+.webcam-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    transition: background-color 0.3s ease;
+}
+
+.capture-container.step-results .webcam-wrapper {
+    background-color: #343a40;
+}
+
+.webcam-video, .preview-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.camera-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 15;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px 40px;
+    border-radius: 10px;
+}
+
+.controls-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* Correction pour Safari iPhone : ajoute un padding en bas équivalent à la zone de sécurité */
+    padding: 20px 20px calc(20px + env(safe-area-inset-bottom)) 20px;
+    box-sizing: border-box;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+}
+
+.height-input {
+    margin-bottom: 1rem;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.button-group {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+
+.submit-btn, .retake-btn, .next-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    flex-grow: 1;
+    box-sizing: border-box;
+    transition: background-color 0.2s;
+}
+
+.submit-btn {
+    background-color: #007bff;
+    color: white;
+}
+.submit-btn:hover { background-color: #0056b3; }
+.submit-btn:disabled { background-color: #aaa; }
+
+.retake-btn {
+    background-color: #6c757d;
+    color: white;
+}
+.retake-btn:hover { background-color: #5a6268; }
+
+.next-btn {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    color: white;
+}
+.next-btn:hover { 
+    background: linear-gradient(135deg, #0e8277 0%, #2dd968 100%);
+}
+
+/* Overlays pour sélection de marque et recommandation */
+.brand-selection-overlay,
+.size-recommendation-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    max-height: 70vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+
+.brand-selection-overlay h3,
+.size-recommendation-overlay h3 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 18px;
+    text-align: center;
+}
+
+.size-recommendation-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid #e0e0e0;
+}
+
+.size-recommendation-section h3 {
+    font-size: 16px;
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.brand-dropdown {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: white;
+}
+
+.brand-dropdown:focus {
+    outline: none;
+    border-color: #0056b3;
+}
+
+.brand-name {
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+    margin: 10px 0;
+    font-weight: 600;
+}
+
+.size-results {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.size-card {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 100px;
+}
+
+.size-card span {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.size-card strong {
+    display: block;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+
+.error-message {
+    color: #ffcdd2;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* --- Styles pour l'affichage des résultats --- */
+
+.results-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.results-overlay * {
+    pointer-events: auto;
+}
+
+.silhouette-svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: auto;
+    max-height: 85%;
+    z-index: 5;
+    opacity: 0.5;
+}
+
+.measurement-item {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 20;
+    background: transparent;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.measurement-item.center {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.measurement-item.left {
+    align-items: flex-start;
+}
+
+.measurement-item label {
+    font-size: 11px;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.measurement-item input {
+    width: 70px;
+    padding: 4px 6px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 4px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.85), rgba(118, 75, 162, 0.85));
+    backdrop-filter: blur(10px);
+    font-weight: 700;
+    font-size: 13px;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+

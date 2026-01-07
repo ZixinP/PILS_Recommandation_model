@@ -1,0 +1,53 @@
+{
+  "brand": "Zara",
+  "unit": "cm",
+  "categories": {
+    "male": {
+      "tops": [
+        { "label": "S", "chest": [89, 93], "waist": [76, 80] },
+        { "label": "M", "chest": [94, 98], "waist": [81, 85] },
+        { "label": "L", "chest": [99, 103], "waist": [86, 90] },
+        { "label": "XL", "chest": [104, 108], "waist": [91, 96] },
+        { "label": "XXL", "chest": [109, 114], "waist": [97, 102] }
+      ],
+      "chemises": [
+        { "label": "S", "chest": [88, 94], "neck": [37, 38] },
+        { "label": "M", "chest": [95, 101], "neck": [39, 40] },
+        { "label": "L", "chest": [102, 108], "neck": [41, 42] },
+        { "label": "XL", "chest": [109, 115], "neck": [43, 44] }
+      ],
+      "pantalons": [
+        { "label": "38", "waist": [74, 78], "hips": [90, 94], "inseam": [76, 78] },
+        { "label": "40", "waist": [78, 82], "hips": [94, 98], "inseam": [77, 79] },
+        { "label": "42", "waist": [82, 86], "hips": [98, 102], "inseam": [78, 80] },
+        { "label": "44", "waist": [86, 90], "hips": [102, 106], "inseam": [79, 81] }
+      ],
+      "manteaux": [
+        { "label": "S", "chest": [91, 96], "waist": [78, 83] },
+        { "label": "M", "chest": [97, 102], "waist": [84, 89] },
+        { "label": "L", "chest": [103, 108], "waist": [90, 95] },
+        { "label": "XL", "chest": [109, 114], "waist": [96, 102] }
+      ]
+    },
+    "female": {
+      "tops": [
+        { "label": "XS", "chest": [78, 82], "waist": [60, 64] },
+        { "label": "S", "chest": [82, 86], "waist": [64, 68] },
+        { "label": "M", "chest": [86, 92], "waist": [68, 74] },
+        { "label": "L", "chest": [92, 98], "waist": [74, 80] }
+      ],
+      "jupes": [
+        { "label": "XS", "waist": [60, 64], "hips": [86, 90] },
+        { "label": "S", "waist": [64, 68], "hips": [90, 94] },
+        { "label": "M", "waist": [68, 74], "hips": [94, 100] },
+        { "label": "L", "waist": [74, 80], "hips": [100, 106] }
+      ],
+      "pantalons": [
+        { "label": "34", "waist": [62, 66], "hips": [88, 92] },
+        { "label": "36", "waist": [66, 70], "hips": [92, 96] },
+        { "label": "38", "waist": [70, 74], "hips": [96, 100] },
+        { "label": "40", "waist": [74, 78], "hips": [100, 104] }
+      ]
+    }
+  }
+}

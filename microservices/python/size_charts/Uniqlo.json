@@ -1,0 +1,32 @@
+{
+  "brand": "Uniqlo",
+  "unit": "cm",
+  "categories": {
+    "male": {
+      "tops": [
+        { "label": "S", "chest": [90, 96] },
+        { "label": "M", "chest": [97, 102] },
+        { "label": "L", "chest": [103, 110] }
+      ],
+      "pantalons": [
+        { "label": "S", "waist": [70, 76], "hips": [86, 92] },
+        { "label": "M", "waist": [76, 82], "hips": [92, 98] },
+        { "label": "L", "waist": [82, 88], "hips": [98, 104] }
+      ]
+    },
+    "female": {
+      "tops": [
+        { "label": "XS", "chest": [75, 81] },
+        { "label": "S", "chest": [81, 87] },
+        { "label": "M", "chest": [87, 93] },
+        { "label": "L", "chest": [93, 99] }
+      ],
+      "pantalons": [
+        { "label": "XS", "waist": [57, 62], "hips": [82, 87] },
+        { "label": "S", "waist": [62, 67], "hips": [87, 92] },
+        { "label": "M", "waist": [67, 72], "hips": [92, 97] },
+        { "label": "L", "waist": [72, 77], "hips": [97, 102] }
+      ]
+    }
+  }
+}

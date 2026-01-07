@@ -1,0 +1,33 @@
+{
+  "brand": "Bershka",
+  "unit": "cm",
+  "categories": {
+    "male": {
+      "tops": [
+        { "label": "S", "chest": [88, 92], "waist": [74, 78] },
+        { "label": "M", "chest": [92, 98], "waist": [78, 84] },
+        { "label": "L", "chest": [98, 104], "waist": [84, 90] }
+      ],
+      "pantalons": [
+        { "label": "38", "waist": [74, 78] },
+        { "label": "40", "waist": [78, 82] },
+        { "label": "42", "waist": [82, 86] },
+        { "label": "44", "waist": [86, 90] }
+      ]
+    },
+    "female": {
+      "tops": [
+        { "label": "XS", "chest": [78, 82], "waist": [58, 62] },
+        { "label": "S", "chest": [82, 86], "waist": [62, 66] },
+        { "label": "M", "chest": [86, 92], "waist": [66, 72] },
+        { "label": "L", "chest": [92, 98], "waist": [72, 78] }
+      ],
+      "pantalons": [
+        { "label": "32", "waist": [58, 62], "hips": [82, 86] },
+        { "label": "34", "waist": [62, 66], "hips": [86, 90] },
+        { "label": "36", "waist": [66, 70], "hips": [90, 94] },
+        { "label": "38", "waist": [70, 74], "hips": [94, 98] }
+      ]
+    }
+  }
+}

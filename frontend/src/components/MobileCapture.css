@@ -1,0 +1,97 @@
+.mobile-capture-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.mobile-container {
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.mobile-container h1 {
+  color: #667eea;
+  margin-bottom: 15px;
+  font-size: 28px;
+}
+
+.mobile-container .icon {
+  font-size: 80px;
+  margin: 20px 0;
+}
+
+.mobile-container .instructions {
+  color: #666;
+  margin: 20px 0;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.mobile-container button {
+  width: 100%;
+  padding: 25px;
+  font-size: 22px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: bold;
+  margin-top: 20px;
+  background: #667eea;
+  color: white;
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.mobile-container button:hover {
+  background: #5568d3;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
+}
+
+.mobile-container button:active {
+  transform: translateY(0);
+}
+
+.mobile-container button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.mobile-container .status {
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.mobile-container .status.connected {
+  background: #d4edda;
+  color: #155724;
+}
+
+.mobile-container .status.waiting {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.mobile-container .status.error {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.mobile-container .status.success {
+  background: #d1ecf1;
+  color: #0c5460;
+}

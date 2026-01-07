@@ -1,0 +1,33 @@
+{
+  "brand": "Pull&Bear",
+  "unit": "cm",
+  "categories": {
+    "male": {
+      "tops": [
+        { "label": "S", "chest": [88, 94] },
+        { "label": "M", "chest": [95, 101] },
+        { "label": "L", "chest": [102, 108] }
+      ],
+      "pantalons": [
+        { "label": "38", "waist": [74, 78] },
+        { "label": "40", "waist": [78, 82] },
+        { "label": "42", "waist": [82, 86] },
+        { "label": "44", "waist": [86, 90] }
+      ]
+    },
+    "female": {
+      "tops": [
+        { "label": "XS", "chest": [76, 82] },
+        { "label": "S", "chest": [82, 88] },
+        { "label": "M", "chest": [88, 94] },
+        { "label": "L", "chest": [94, 100] }
+      ],
+      "pantalons": [
+        { "label": "32", "waist": [58, 62], "hips": [82, 86] },
+        { "label": "34", "waist": [62, 66], "hips": [86, 90] },
+        { "label": "36", "waist": [66, 70], "hips": [90, 94] },
+        { "label": "38", "waist": [70, 74], "hips": [94, 98] }
+      ]
+    }
+  }
+}
