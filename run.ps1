@@ -9,16 +9,16 @@ $SCRIPT_DIR = $PSScriptRoot
 Set-Location $SCRIPT_DIR
 
 Write-Host ""
-Write-Host "╔══════════════════════════════════════════════╗" -ForegroundColor Cyan
-Write-Host "║       🚀 FashionistAI - Starting            ║"
-Write-Host "╚══════════════════════════════════════════════╝" -ForegroundColor Cyan
+
+Write-Host "       FashionistAI - Starting            "
+
 Write-Host ""
 
 # ==========================================
 # Stop existing services
 # ==========================================
 
-Write-Host "🛑 Stopping existing services..." -ForegroundColor Yellow
+Write-Host " Stopping existing services..." -ForegroundColor Yellow
 
 # Function to kill process by port
 function Kill-Port($port) {
@@ -41,7 +41,7 @@ Get-Process | Where-Object {$_.ProcessName -match "node|python|uvicorn"} | ForEa
 }
 
 Start-Sleep -Seconds 1
-Write-Host "✅ Services stopped" -ForegroundColor Green
+Write-Host " Services stopped" -ForegroundColor Green
 Write-Host ""
 
 # ==========================================
@@ -54,11 +54,11 @@ New-Item -ItemType Directory -Force -Path "logs" | Out-Null
 # Start Python Microservice
 # ==========================================
 
-Write-Host "🐍 Starting Python Microservice (YOLO)..." -ForegroundColor Cyan
+Write-Host " Starting Python Microservice (YOLO)..." -ForegroundColor Cyan
 Push-Location microservices/python
 
 if (-not (Test-Path "venv")) {
-    Write-Host "❌ Python virtual environment not found" -ForegroundColor Red
+    Write-Host " Python virtual environment not found" -ForegroundColor Red
     Write-Host "   Please run .\setup.ps1 first"
     exit 1
 }
@@ -66,16 +66,16 @@ if (-not (Test-Path "venv")) {
 # Start Python service
 $pythonProcess = Start-Process -FilePath "venv\Scripts\python.exe" `
     -ArgumentList "-m uvicorn main:app --host 0.0.0.0 --port 5001 --log-level info" `
-    -RedirectStandardOutput "$SCRIPT_DIR\logs\python.log" `
-    -RedirectStandardError "$SCRIPT_DIR\logs\python.log" `
+    -RedirectStandardOutput "$SCRIPT_DIR\logs\python_out.log" `
+    -RedirectStandardError "$SCRIPT_DIR\logs\python_err.log" `
     -NoNewWindow -PassThru
 
 Start-Sleep -Seconds 2
 
 if (-not $pythonProcess.HasExited) {
-    Write-Host "   ✅ Started (PID: $($pythonProcess.Id)) on http://localhost:5001" -ForegroundColor Green
+    Write-Host "   Started (PID: $($pythonProcess.Id)) on http://localhost:5001" -ForegroundColor Green
 } else {
-    Write-Host "   ❌ Failed to start Python microservice" -ForegroundColor Red
+    Write-Host "   Failed to start Python microservice" -ForegroundColor Red
     Write-Host "   Check logs: logs\python.log"
     exit 1
 }
@@ -87,7 +87,7 @@ Write-Host ""
 # Start TypeScript Backend
 # ==========================================
 
-Write-Host "⚙️  Starting TypeScript Backend..." -ForegroundColor Cyan
+Write-Host "Starting TypeScript Backend..." -ForegroundColor Cyan
 
 # Check mode
 $backendArgs = @("node_modules\.bin\tsx.cmd", "watch", "src/server.ts")
@@ -105,16 +105,16 @@ if ($args[0] -eq "prod") {
 
 $backendProcess = Start-Process -FilePath $nodeCmd `
     -ArgumentList $backendArgs `
-    -RedirectStandardOutput "$SCRIPT_DIR\logs\backend.log" `
-    -RedirectStandardError "$SCRIPT_DIR\logs\backend.log" `
+    -RedirectStandardOutput "$SCRIPT_DIR\logs\backend_out.log" `
+    -RedirectStandardError "$SCRIPT_DIR\logs\backend_err.log" `
     -NoNewWindow -PassThru
 
 Start-Sleep -Seconds 3
 
 if (-not $backendProcess.HasExited) {
-    Write-Host "   ✅ Started (PID: $($backendProcess.Id)) on http://localhost:8000" -ForegroundColor Green
+    Write-Host "  Started (PID: $($backendProcess.Id)) on http://localhost:8000" -ForegroundColor Green
 } else {
-    Write-Host "   ❌ Failed to start Backend" -ForegroundColor Red
+    Write-Host "  Failed to start Backend" -ForegroundColor Red
     Write-Host "   Check logs: logs\backend.log"
     Stop-Process -Id $pythonProcess.Id -Force -ErrorAction SilentlyContinue
     exit 1
@@ -126,7 +126,7 @@ Write-Host ""
 # Start React Frontend
 # ==========================================
 
-Write-Host "⚛️  Starting React Frontend..." -ForegroundColor Cyan
+Write-Host "Starting React Frontend..." -ForegroundColor Cyan
 Push-Location frontend
 
 # Start React
@@ -136,14 +136,14 @@ Push-Location frontend
 
 $frontendProcess = Start-Process -FilePath "cmd" `
     -ArgumentList "/c npm start" `
-    -RedirectStandardOutput "..\logs\frontend.log" `
-    -RedirectStandardError "..\logs\frontend.log" `
+    -RedirectStandardOutput "..\logs\frontend_out.log" `
+    -RedirectStandardError "..\logs\frontend_err.log" `
     -NoNewWindow -PassThru
 
 if (-not $frontendProcess.HasExited) {
-    Write-Host "   ✅ Started (PID: $($frontendProcess.Id)) on http://localhost:3000" -ForegroundColor Green
+    Write-Host "   Started (PID: $($frontendProcess.Id)) on http://localhost:3000" -ForegroundColor Green
 } else {
-    Write-Host "   ❌ Failed to start Frontend" -ForegroundColor Red
+    Write-Host "   Failed to start Frontend" -ForegroundColor Red
     Stop-Process -Id $pythonProcess.Id -Force -ErrorAction SilentlyContinue
     Stop-Process -Id $backendProcess.Id -Force -ErrorAction SilentlyContinue
     exit 1
@@ -156,7 +156,7 @@ Write-Host ""
 # Wait for services
 # ==========================================
 
-Write-Host "⏳ Waiting for services to be ready..." -ForegroundColor Yellow
+Write-Host "Waiting for services to be ready..." -ForegroundColor Yellow
 Start-Sleep -Seconds 5
 
 # ==========================================
@@ -164,22 +164,22 @@ Start-Sleep -Seconds 5
 # ==========================================
 
 Write-Host ""
-Write-Host "🏥 Checking services health..." -ForegroundColor Cyan
+Write-Host " Checking services health..." -ForegroundColor Cyan
 
 function Check-Health($url, $name, $maxAttempts=5) {
     for ($i=1; $i -le $maxAttempts; $i++) {
         try {
             $response = Invoke-WebRequest -Uri $url -UseBasicParsing -TimeoutSec 5 -ErrorAction Stop
             if ($response.StatusCode -eq 200) {
-                Write-Host "   ✅ $name: OK" -ForegroundColor Green
+                Write-Host " $($name): OK" -ForegroundColor Green
                 return $true
             }
         } catch {
-            Write-Host "   ⚠️  $name: Attempt $i/$maxAttempts failed" -ForegroundColor Yellow
+            Write-Host "   $($name): Attempt $i/$maxAttempts failed" -ForegroundColor Yellow
             Start-Sleep -Seconds 1
         }
     }
-    Write-Host "   ❌ $name: UNAVAILABLE after $maxAttempts attempts" -ForegroundColor Red
+    Write-Host "   $($name): UNAVAILABLE after $maxAttempts attempts" -ForegroundColor Red
     return $false
 }
 
@@ -203,27 +203,27 @@ if (-not $networkIP) {
 # Summary
 # ==========================================
 
-Write-Host "╔══════════════════════════════════════════════╗"
-Write-Host "║         ✅ FashionistAI Started!             ║"
-Write-Host "╚══════════════════════════════════════════════╝"
+
+Write-Host "         FashionistAI Started!            "
+
 Write-Host ""
-Write-Host "📱 PC Access :" -ForegroundColor Green
+Write-Host "PC Access :" -ForegroundColor Green
 Write-Host "   http://localhost:3000"
 Write-Host ""
-Write-Host "📱 Mobile Access (QR Code) :" -ForegroundColor Green
+Write-Host "Mobile Access (QR Code) :" -ForegroundColor Green
 Write-Host "   http://$($networkIP):8000"
 Write-Host ""
-Write-Host "🔧 Services :" -ForegroundColor Green
+Write-Host "Services :" -ForegroundColor Green
 Write-Host "   • Backend TypeScript : http://localhost:8000"
 Write-Host "   • Python Microservice: http://localhost:5001"
 Write-Host "   • Frontend React     : http://localhost:3000"
 Write-Host ""
-Write-Host "📋 Logs :" -ForegroundColor Yellow
-Write-Host "   Get-Content logs\backend.log -Wait"
-Write-Host "   Get-Content logs\python.log -Wait"
-Write-Host "   Get-Content logs\frontend.log -Wait"
+Write-Host "Logs :" -ForegroundColor Yellow
+Write-Host "   Get-Content logs\backend_out.log -Wait"
+Write-Host "   Get-Content logs\python_out.log -Wait"
+Write-Host "   Get-Content logs\frontend_out.log -Wait"
 Write-Host ""
-Write-Host "🛑 To Stop :" -ForegroundColor Yellow
+Write-Host "To Stop :" -ForegroundColor Yellow
 Write-Host "   Press Ctrl+C in this window"
 Write-Host ""
 
@@ -232,13 +232,13 @@ try {
     while ($true) {
         Start-Sleep -Seconds 1
         if ($pythonProcess.HasExited -or $backendProcess.HasExited) {
-             Write-Host "⚠️  One or more services stopped unexpectedly." -ForegroundColor Red
+             Write-Host "One or more services stopped unexpectedly." -ForegroundColor Red
              break
         }
     }
 } finally {
     Write-Host ""
-    Write-Host "🛑 Stopping services..." -ForegroundColor Yellow
+    Write-Host "Stopping services..." -ForegroundColor Yellow
     Stop-Process -Id $pythonProcess.Id -Force -ErrorAction SilentlyContinue
     Stop-Process -Id $backendProcess.Id -Force -ErrorAction SilentlyContinue
     Stop-Process -Id $frontendProcess.Id -Force -ErrorAction SilentlyContinue
@@ -248,5 +248,5 @@ try {
     Kill-Port 5001
     Kill-Port 8000
     
-    Write-Host "✅ Stopped." -ForegroundColor Green
+    Write-Host "Stopped." -ForegroundColor Green
 }
