@@ -32,16 +32,21 @@ const QRCodeDisplay: React.FC<QRCodeDisplayProps> = ({ onImageCaptured, onTrigge
     const handleConnect = () => {
       console.log('✅ PC Connecté au serveur WebSocket, ID:', socket.id);
       setIsConnected(true);
-      const newSessionId = socket.id || '';
-      setSessionId(newSessionId);
+      const newSessionId = socket.id;
       
-      // Envoyer pc-join avec le sessionId
-      console.log('📤 Envoi pc-join avec ID:', newSessionId);
-      socket.emit('pc-join', newSessionId);
-      
-      // Générer le QR code après connexion
-      console.log('🔍 Lancement génération QR code...');
-      generateQRCode(newSessionId);
+      if (newSessionId) {
+        setSessionId(newSessionId);
+        
+        // Envoyer pc-join avec le sessionId
+        console.log('📤 Envoi pc-join avec ID:', newSessionId);
+        socket.emit('pc-join', { sessionId: newSessionId });
+        
+        // Générer le QR code après connexion
+        console.log('🔍 Lancement génération QR code...');
+        generateQRCode(newSessionId);
+      } else {
+        console.error('❌ Socket connectÃ© mais pas d\'ID');
+      }
     };
 
     const handleDisconnect = () => {

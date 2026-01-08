@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import Webcam from 'react-webcam';
+import SMPLViewer from './SMPLViewer';
 import './PhotoCapture.css';
 import { API_CONFIG } from '../config';
 
@@ -137,6 +138,7 @@ const BodyMeasurementApp: React.FC<BodyMeasurementAppProps> = ({ initialImage, t
     const webcamRef = useRef<Webcam>(null);
     const [height, setHeight] = useState<string>('');
     const [measurements, setMeasurements] = useState<MeasurementsData | null>(null);
+    const [meshData, setMeshData] = useState<any>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
     const [imgSrc, setImgSrc] = useState<string | null>(null);
@@ -218,6 +220,9 @@ const BodyMeasurementApp: React.FC<BodyMeasurementAppProps> = ({ initialImage, t
             }
             const result = await apiResponse.json();
             setMeasurements(result.measurements as MeasurementsData);
+            if (result.mesh_data) {
+                setMeshData(result.mesh_data);
+            }
             setStep('results');
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Une erreur est survenue');
@@ -228,6 +233,7 @@ const BodyMeasurementApp: React.FC<BodyMeasurementAppProps> = ({ initialImage, t
 
     const reset = (): void => {
         setMeasurements(null);
+        setMeshData(null);
         setError('');
         setImgSrc(null);
         setHeight('');
@@ -323,7 +329,13 @@ const BodyMeasurementApp: React.FC<BodyMeasurementAppProps> = ({ initialImage, t
 
             {step === 'results' && measurements && (
                 <div className="results-overlay">
-                    <SilhouetteSVG />
+                    {meshData ? (
+                        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 5 }}>
+                            <SMPLViewer meshData={meshData} />
+                        </div>
+                    ) : (
+                        <SilhouetteSVG />
+                    )}
                     <div className="measurement-item center" style={{ top: '13%' }}>
                         <label>Épaules</label>
                         <input 
