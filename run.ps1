@@ -15,6 +15,24 @@ Write-Host "       FashionistAI - Starting            "
 Write-Host ""
 
 # ==========================================
+# Read Configuration
+# ==========================================
+
+$envContent = Get-Content ".env" -ErrorAction SilentlyContinue
+
+$backendPort = "8000"
+$matchedPort = $envContent | Select-String "^BACKEND_PORT=(.*)$"
+if ($matchedPort) {
+    $backendPort = $matchedPort.Matches.Groups[1].Value.Trim()
+}
+
+$networkIP = "localhost"
+$matchedIP = $envContent | Select-String "^NETWORK_IP=(.*)$"
+if ($matchedIP) {
+    $networkIP = $matchedIP.Matches.Groups[1].Value.Trim()
+}
+
+# ==========================================
 # Stop existing services
 # ==========================================
 
@@ -31,7 +49,7 @@ function Kill-Port($port) {
 
 Kill-Port 3000
 Kill-Port 5001
-Kill-Port 8000
+Kill-Port $backendPort
 
 # Kill by name if any remain
 Get-Process | Where-Object {$_.ProcessName -match "node|python|uvicorn"} | ForEach-Object {
@@ -112,7 +130,7 @@ $backendProcess = Start-Process -FilePath $nodeCmd `
 Start-Sleep -Seconds 3
 
 if (-not $backendProcess.HasExited) {
-    Write-Host "  Started (PID: $($backendProcess.Id)) on http://localhost:8000" -ForegroundColor Green
+    Write-Host "  Started (PID: $($backendProcess.Id)) on http://localhost:$backendPort" -ForegroundColor Green
 } else {
     Write-Host "  Failed to start Backend" -ForegroundColor Red
     Write-Host "   Check logs: logs\backend.log"
@@ -128,6 +146,9 @@ Write-Host ""
 
 Write-Host "Starting React Frontend..." -ForegroundColor Cyan
 Push-Location frontend
+
+# Force PORT to 3000 to avoid conflict with global env or backend
+$env:PORT = 3000
 
 # Start React
 # We use npm start. Since we can't easily suppress the browser opening or keep it cleanly in background without a window in PS without hiding it completely.
@@ -184,20 +205,11 @@ function Check-Health($url, $name, $maxAttempts=5) {
 }
 
 Check-Health "http://127.0.0.1:5001/health" "Python Microservice" | Out-Null
-Check-Health "http://127.0.0.1:8000/health" "TypeScript Backend" | Out-Null
+Check-Health "http://127.0.0.1:$backendPort/health" "TypeScript Backend" | Out-Null
 # Frontend might take longer
 Check-Health "http://127.0.0.1:3000" "React Frontend" -maxAttempts 8 | Out-Null
 
 Write-Host ""
-
-# ==========================================
-# Get Network IP
-# ==========================================
-
-$networkIP = (Get-Content ".env" | Select-String "^NETWORK_IP=(.*)$" ).Matches.Groups[1].Value
-if (-not $networkIP) {
-   $networkIP = "localhost"
-}
 
 # ==========================================
 # Summary
@@ -211,10 +223,10 @@ Write-Host "PC Access :" -ForegroundColor Green
 Write-Host "   http://localhost:3000"
 Write-Host ""
 Write-Host "Mobile Access (QR Code) :" -ForegroundColor Green
-Write-Host "   http://$($networkIP):8000"
+Write-Host "   http://$($networkIP):$backendPort"
 Write-Host ""
 Write-Host "Services :" -ForegroundColor Green
-Write-Host "   • Backend TypeScript : http://localhost:8000"
+Write-Host "   • Backend TypeScript : http://localhost:$backendPort"
 Write-Host "   • Python Microservice: http://localhost:5001"
 Write-Host "   • Frontend React     : http://localhost:3000"
 Write-Host ""
@@ -246,7 +258,7 @@ try {
     # Also cleanup children if possible (npm starts node, etc)
     Kill-Port 3000
     Kill-Port 5001
-    Kill-Port 8000
+    Kill-Port 8001
     
     Write-Host "Stopped." -ForegroundColor Green
 }

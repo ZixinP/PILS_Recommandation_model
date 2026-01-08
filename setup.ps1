@@ -137,6 +137,7 @@ Write-Host ""
 Write-Host " Installing Frontend Dependencies..."
 Push-Location frontend
 npm install
+npm install @react-three/fiber@^8.16.0 @react-three/drei@^9.105.0
 if ($LASTEXITCODE -eq 0) {
     Write-Host " Frontend dependencies installed" -ForegroundColor Green
 } else {
@@ -233,10 +234,10 @@ Write-Host "To start the application:" -ForegroundColor Green
 Write-Host "   .\run.ps1"
 Write-Host ""
 Write-Host "Access URLs:" -ForegroundColor Green
-Write-Host "   • Backend  : http://localhost:8000"
+Write-Host "   • Backend  : http://localhost:8001"
 Write-Host "   • Frontend : http://localhost:3000"
 Write-Host "   • Python   : http://localhost:5001"
 Write-Host ""
 Write-Host "QR Code (mobile):" -ForegroundColor Green
-Write-Host "   • http://$($networkIP):8000"
+Write-Host "   • http://$($networkIP):8001"
 Write-Host ""
