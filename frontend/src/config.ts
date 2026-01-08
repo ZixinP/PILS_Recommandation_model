@@ -8,13 +8,13 @@
 
 // Détection automatique : localhost sur PC, IP réseau dans le QR code
 const isLocalAccess = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-const NETWORK_IP = '10.56.68.144';
+const NETWORK_IP = '192.168.0.207';
 
 export const API_CONFIG = {
   // URL du backend : localhost sur PC (pour la webcam), IP réseau pour le QR code mobile
   BACKEND_URL: isLocalAccess 
-    ? 'http://localhost:8000' 
-    : `http://${NETWORK_IP}:8000`,
+    ? 'http://localhost:8001' 
+    : `http://${NETWORK_IP}:8001`,
   
   // IP réseau (utilisée pour le QR code même si on accède via localhost)
   NETWORK_IP: NETWORK_IP,
