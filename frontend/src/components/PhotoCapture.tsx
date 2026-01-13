@@ -6,9 +6,10 @@ import { API_CONFIG } from '../config';
 
 interface SilhouetteSVGProps {
   isFilter?: boolean;
+  view?: 'front' | 'side';
 }
 
-const SilhouetteSVG: React.FC<SilhouetteSVGProps> = ({ isFilter = false }) => (
+const SilhouetteSVG: React.FC<SilhouetteSVGProps> = ({ isFilter = false, view = 'front' }) => (
     <svg viewBox="0 0 200 500" className="silhouette-svg" style={{ zIndex: isFilter ? 5 : 11 }}>
         <defs>
             <linearGradient id="silhouetteGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -23,97 +24,75 @@ const SilhouetteSVG: React.FC<SilhouetteSVGProps> = ({ isFilter = false }) => (
             strokeLinecap="round"
             strokeLinejoin="round"
         >
-            {/* Tête ovale */}
-            <ellipse cx="100" cy="35" rx="18" ry="22" />
-            
-            {/* Cou */}
-            <path d="M 88 52 Q 90 58, 92 62" />
-            <path d="M 112 52 Q 110 58, 108 62" />
-            
-            {/* Épaules et début du torse */}
-            <path d="M 92 62 Q 85 68, 70 75" />
-            <path d="M 108 62 Q 115 68, 130 75" />
-            
-            {/* Bras gauche */}
-            <path d="M 70 75 Q 60 85, 55 100 Q 52 115, 50 135 Q 49 155, 52 175" />
-            {/* Main gauche */}
-            <ellipse cx="52" cy="180" rx="6" ry="8" />
-            
-            {/* Bras droit */}
-            <path d="M 130 75 Q 140 85, 145 100 Q 148 115, 150 135 Q 151 155, 148 175" />
-            {/* Main droite */}
-            <ellipse cx="148" cy="180" rx="6" ry="8" />
-            
-            {/* Torse - côté gauche */}
-            <path d="M 70 75 Q 68 95, 70 120 Q 72 145, 75 170" />
-            
-            {/* Torse - côté droit */}
-            <path d="M 130 75 Q 132 95, 130 120 Q 128 145, 125 170" />
-            
-            {/* Taille */}
-            <path d="M 75 170 Q 82 172, 100 172 Q 118 172, 125 170" />
-            
-            {/* Hanches - côté gauche */}
-            <path d="M 75 170 Q 72 185, 75 205" />
-            
-            {/* Hanches - côté droit */}
-            <path d="M 125 170 Q 128 185, 125 205" />
-            
-            {/* Entrejambe */}
-            <path d="M 75 205 Q 85 210, 100 212" />
-            <path d="M 125 205 Q 115 210, 100 212" />
-            
-            {/* Jambe gauche - cuisse */}
-            <path d="M 75 205 Q 72 240, 70 280" />
-            {/* Jambe gauche - mollet */}
-            <path d="M 70 280 Q 68 320, 66 360 Q 65 390, 64 420" />
-            
-            {/* Jambe droite - cuisse */}
-            <path d="M 125 205 Q 128 240, 130 280" />
-            {/* Jambe droite - mollet */}
-            <path d="M 130 280 Q 132 320, 134 360 Q 135 390, 136 420" />
-            
-            {/* Jambe gauche - intérieur cuisse */}
-            <path d="M 100 212 Q 88 240, 82 280" />
-            {/* Jambe gauche - intérieur mollet */}
-            <path d="M 82 280 Q 78 320, 76 360 Q 74 390, 72 420" />
-            
-            {/* Jambe droite - intérieur cuisse */}
-            <path d="M 100 212 Q 112 240, 118 280" />
-            {/* Jambe droite - intérieur mollet */}
-            <path d="M 118 280 Q 122 320, 124 360 Q 126 390, 128 420" />
-            
-            {/* Pieds */}
-            <path d="M 64 420 Q 60 428, 58 432 L 72 432 L 72 425" />
-            <path d="M 136 420 Q 140 428, 142 432 L 128 432 L 128 425" />
+            {view === 'front' ? (
+                <>
+                    {/* Tête ovale */}
+                    <ellipse cx="100" cy="35" rx="18" ry="22" />
+                    {/* Cou */}
+                    <path d="M 88 52 Q 90 58, 92 62" />
+                    <path d="M 112 52 Q 110 58, 108 62" />
+                    {/* Épaules et début du torse */}
+                    <path d="M 92 62 Q 85 68, 70 75" />
+                    <path d="M 108 62 Q 115 68, 130 75" />
+                    {/* Bras gauche */}
+                    <path d="M 70 75 Q 60 85, 55 100 Q 52 115, 50 135 Q 49 155, 52 175" />
+                    {/* Main gauche */}
+                    <ellipse cx="52" cy="180" rx="6" ry="8" />
+                    {/* Bras droit */}
+                    <path d="M 130 75 Q 140 85, 145 100 Q 148 115, 150 135 Q 151 155, 148 175" />
+                    {/* Main droite */}
+                    <ellipse cx="148" cy="180" rx="6" ry="8" />
+                    {/* Torse */}
+                    <path d="M 70 75 Q 68 95, 70 120 Q 72 145, 75 170" />
+                    <path d="M 130 75 Q 132 95, 130 120 Q 128 145, 125 170" />
+                    {/* Taille */}
+                    <path d="M 75 170 Q 82 172, 100 172 Q 118 172, 125 170" />
+                    {/* Hanches */}
+                    <path d="M 75 170 Q 72 185, 75 205" />
+                    <path d="M 125 170 Q 128 185, 125 205" />
+                    {/* Entrejambe */}
+                    <path d="M 75 205 Q 85 210, 100 212" />
+                    <path d="M 125 205 Q 115 210, 100 212" />
+                    {/* Jambes */}
+                    <path d="M 75 205 Q 72 240, 70 280" />
+                    <path d="M 70 280 Q 68 320, 66 360 Q 65 390, 64 420" />
+                    <path d="M 125 205 Q 128 240, 130 280" />
+                    <path d="M 130 280 Q 132 320, 134 360 Q 135 390, 136 420" />
+                    <path d="M 100 212 Q 88 240, 82 280" />
+                    <path d="M 82 280 Q 78 320, 76 360 Q 74 390, 72 420" />
+                    <path d="M 100 212 Q 112 240, 118 280" />
+                    <path d="M 118 280 Q 122 320, 124 360 Q 126 390, 128 420" />
+                    {/* Pieds */}
+                    <path d="M 64 420 Q 60 428, 58 432 L 72 432 L 72 425" />
+                    <path d="M 136 420 Q 140 428, 142 432 L 128 432 L 128 425" />
+                </>
+            ) : (
+                <>
+                     {/* SIDE VIEW SILHOUETTE (Simplified) */}
+                    {/* Tête */}
+                    <ellipse cx="100" cy="35" rx="16" ry="22" />
+                    {/* Cou */}
+                    <path d="M 95 56 L 95 62" />
+                    <path d="M 105 56 L 105 62" />
+                    {/* Dos */}
+                    <path d="M 90 62 Q 80 100, 85 170" />
+                    {/* Ventre */}
+                    <path d="M 110 62 Q 125 100, 115 170" />
+                    {/* Jambe (une seule visible/profil) */}
+                    <path d="M 85 170 L 85 420" />
+                    <path d="M 115 170 L 115 420" />
+                    {/* Bras */}
+                    <path d="M 100 65 L 100 180" />
+                </>
+            )}
         </g>
         
-        {!isFilter && (
+        {!isFilter && view === 'front' && (
             <g stroke="rgba(255,255,255,0.7)" strokeWidth="1" strokeDasharray="4,4" fill="white">
                 {/* Lignes de mesure - Épaules */}
                 <line x1="60" y1="75" x2="140" y2="75" />
                 <circle cx="60" cy="75" r="2.5" />
                 <circle cx="140" cy="75" r="2.5" />
-                
-                {/* Lignes de mesure - Poitrine */}
-                <line x1="68" y1="105" x2="132" y2="105" />
-                <circle cx="68" cy="105" r="2.5" />
-                <circle cx="132" cy="105" r="2.5" />
-                
-                {/* Lignes de mesure - Taille */}
-                <line x1="75" y1="170" x2="125" y2="170" />
-                <circle cx="75" cy="170" r="2.5" />
-                <circle cx="125" cy="170" r="2.5" />
-                
-                {/* Ligne de mesure - Bras gauche */}
-                <line x1="40" y1="75" x2="40" y2="180" />
-                <circle cx="40" cy="75" r="2.5" />
-                <circle cx="40" cy="180" r="2.5" />
-                
-                {/* Ligne de mesure - Jambe */}
-                <line x1="50" y1="205" x2="50" y2="420" />
-                <circle cx="50" cy="205" r="2.5" />
-                <circle cx="50" cy="420" r="2.5" />
             </g>
         )}
     </svg>
@@ -127,7 +106,7 @@ interface MeasurementsData {
     leg_length: string;
 }
 
-type Step = 'capture' | 'preview' | 'results';
+type Step = 'capture-front' | 'capture-side' | 'preview' | 'results';
 
 interface BodyMeasurementAppProps {
     initialImage?: string;
@@ -141,8 +120,9 @@ const BodyMeasurementApp: React.FC<BodyMeasurementAppProps> = ({ initialImage, t
     const [meshData, setMeshData] = useState<any>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
-    const [imgSrc, setImgSrc] = useState<string | null>(null);
-    const [step, setStep] = useState<Step>('capture');
+    const [imgFront, setImgFront] = useState<string | null>(null);
+    const [imgSide, setImgSide] = useState<string | null>(null);
+    const [step, setStep] = useState<Step>('capture-front');
     const [isCameraLoading, setCameraLoading] = useState<boolean>(true);
     const [showBrandSelection, setShowBrandSelection] = useState<boolean>(false);
     const [brands, setBrands] = useState<string[]>([]);
@@ -163,11 +143,11 @@ const BodyMeasurementApp: React.FC<BodyMeasurementAppProps> = ({ initialImage, t
         fetchBrands();
     }, []);
 
-    // Mettre à jour l'image si elle est fournie depuis le mobile
+    // Mettre à jour l'image si elle est fournie depuis le mobile (Assume it's Front for now)
     React.useEffect(() => {
         if (initialImage) {
-            setImgSrc(initialImage);
-            setStep('preview');
+            setImgFront(initialImage);
+            setStep('capture-side');
         }
     }, [initialImage]);
 
@@ -183,8 +163,13 @@ const BodyMeasurementApp: React.FC<BodyMeasurementAppProps> = ({ initialImage, t
         if (webcamRef.current) {
             const imageSrc = webcamRef.current.getScreenshot();
             if (imageSrc) {
-                setImgSrc(imageSrc);
-                setStep('preview');
+                if (step === 'capture-front') {
+                    setImgFront(imageSrc);
+                    setStep('capture-side');
+                } else if (step === 'capture-side') {
+                    setImgSide(imageSrc);
+                    setStep('preview');
+                }
             } else {
                 setError("Impossible de capturer l'image. Assurez-vous d'avoir autorisé l'accès à la caméra.");
             }
@@ -199,17 +184,21 @@ const BodyMeasurementApp: React.FC<BodyMeasurementAppProps> = ({ initialImage, t
         setIsLoading(true);
         setError('');
 
-        if (!imgSrc) {
-            setError('Aucune image à analyser.');
+        if (!imgFront || !imgSide) {
+            setError('Images manquantes.');
             setIsLoading(false);
             return;
         }
 
-        const response = await fetch(imgSrc);
-        const blob = await response.blob();
-        const file = new File([blob], "capture.jpeg", { type: "image/jpeg" });
+        const blobFront = await (await fetch(imgFront)).blob();
+        const blobSide = await (await fetch(imgSide)).blob();
+        
+        const fileFront = new File([blobFront], "front.jpeg", { type: "image/jpeg" });
+        const fileSide = new File([blobSide], "side.jpeg", { type: "image/jpeg" });
+        
         const formData = new FormData();
-        formData.append('image', file);
+        formData.append('image_front', fileFront);
+        formData.append('image_side', fileSide);
         formData.append('height', height);
 
         try {
@@ -235,9 +224,10 @@ const BodyMeasurementApp: React.FC<BodyMeasurementAppProps> = ({ initialImage, t
         setMeasurements(null);
         setMeshData(null);
         setError('');
-        setImgSrc(null);
+        setImgFront(null);
+        setImgSide(null);
         setHeight('');
-        setStep('capture');
+        setStep('capture-front');
         setShowBrandSelection(false);
         setSelectedBrand('');
         setSizeRecommendation(null);
@@ -307,7 +297,7 @@ const BodyMeasurementApp: React.FC<BodyMeasurementAppProps> = ({ initialImage, t
     return (
         <div className={`capture-container step-${step}`}>
             <div className="webcam-wrapper">
-                {step === 'capture' && (
+                {(step === 'capture-front' || step === 'capture-side') && (
                     <>
                         {isCameraLoading && <div className="camera-loader">Chargement de la caméra...</div>}
                         <Webcam 
@@ -320,12 +310,22 @@ const BodyMeasurementApp: React.FC<BodyMeasurementAppProps> = ({ initialImage, t
                             onUserMedia={() => setCameraLoading(false)}
                             onUserMediaError={handleUserMediaError}
                         />
+                        <div className="instruction-overlay">
+                            {step === 'capture-front' ? '1. PHOTO DE FACE' : '2. PHOTO DE PROFIL (Tournez de 90°)'}
+                        </div>
                     </>
                 )}
-                {step === 'preview' && imgSrc && <img src={imgSrc} alt="Aperçu de la capture" className="preview-image" />}
+                {step === 'preview' && (
+                    <div className="preview-container" style={{ display: 'flex', gap: '10px', overflowX: 'auto' }}>
+                        {imgFront && <img src={imgFront} alt="Aperçu Face" className="preview-image" style={{ width: '48%', objectFit: 'cover' }} />}
+                        {imgSide && <img src={imgSide} alt="Aperçu Profil" className="preview-image" style={{ width: '48%', objectFit: 'cover' }} />}
+                    </div>
+                )}
             </div>
 
-            {step === 'capture' && !isCameraLoading && <SilhouetteSVG isFilter={true} />}
+            {(step === 'capture-front' || step === 'capture-side') && !isCameraLoading && (
+                <SilhouetteSVG isFilter={true} view={step === 'capture-front' ? 'front' : 'side'} />
+            )}
 
             {step === 'results' && measurements && (
                 <div className="results-overlay">
@@ -334,7 +334,7 @@ const BodyMeasurementApp: React.FC<BodyMeasurementAppProps> = ({ initialImage, t
                             <SMPLViewer meshData={meshData} />
                         </div>
                     ) : (
-                        <SilhouetteSVG />
+                        <SilhouetteSVG view='front' />
                     )}
                     <div className="measurement-item center" style={{ top: '13%' }}>
                         <label>Épaules</label>
@@ -380,8 +380,10 @@ const BodyMeasurementApp: React.FC<BodyMeasurementAppProps> = ({ initialImage, t
             )}
             
             <div className="controls-overlay">
-                 {step === 'capture' && !isCameraLoading && (
-                     <button onClick={handleCapture} className="submit-btn">Capturer</button>
+                 {(step === 'capture-front' || step === 'capture-side') && !isCameraLoading && (
+                     <button onClick={handleCapture} className="submit-btn">
+                         {step === 'capture-front' ? 'Capturer Face' : 'Capturer Profil'}
+                     </button>
                  )}
                 {step === 'preview' && (
                     <>
@@ -410,7 +412,6 @@ const BodyMeasurementApp: React.FC<BodyMeasurementAppProps> = ({ initialImage, t
                                     onChange={(e) => {
                                         const brand = e.target.value;
                                         setSelectedBrand(brand);
-                                        // Déclencher automatiquement la recommandation lors du changement
                                         if (brand) {
                                             handleGetSizeRecommendation(brand);
                                         } else {
